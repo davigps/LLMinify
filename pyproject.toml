@@ -3,7 +3,13 @@ name = "LLMinify"
 version = "1.0.0"
 description = "Default template for PDM package"
 authors = [{ name = "Davi Sousa", email = "davi.gomes.sousa@ccc.ufcg.edu.br" }]
-dependencies = ["click>=8.1.7", "ruff>=0.5.6", "pre-commit>=3.8.0"]
+dependencies = [
+    "click>=8.1.7",
+    "ruff>=0.5.6",
+    "pre-commit>=3.8.0",
+    "langchain>=0.2.12",
+    "langchain-anthropic>=0.1.22",
+]
 requires-python = "==3.12.*"
 readme = "README.md"
 license = { text = "MIT" }

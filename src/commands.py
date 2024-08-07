@@ -1,24 +1,31 @@
 import click
 
+from handlers import (
+    list_llms_handler,
+    list_projects_handler,
+    run_llm_handler,
+    run_terser_handler,
+)
+
 
 @click.command(help="List all available LLMs.")
 def list_llms():
-    click.echo("Available LLMs:")
+    list_llms_handler.handle()
 
 
 @click.command(help="List all available projects to be minified.")
 def list_projects():
-    click.echo("Available projects:")
+    list_projects_handler.handle()
 
 
 @click.command(help="Minify a JavaScript project using Terser.")
 def terser():
-    click.echo("Minifying with Terser...")
+    run_terser_handler.handle()
 
 
 @click.command(help="Minify a JavaScript project using a specific LLM.")
 def llm():
-    click.echo("Minifying with LLM...")
+    run_llm_handler.handle()
 
 
 @click.group()
@@ -29,4 +36,5 @@ def app():
 app.add_command(terser)
 app.add_command(llm)
 app.add_command(list_llms)
+app.add_command(list_projects)
 app.add_command(list_projects)
