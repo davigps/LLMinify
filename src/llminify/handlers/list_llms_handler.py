@@ -5,7 +5,7 @@ from llminify.utils.log import logger
 def handle():
     logger.info("Available LLMs:")
     for model in AVAILABLE_MODELS:
-        logger.info(f"- {model}")
+        logger.info(f"- '{model}'")
 
     logger.info("")
     logger.info("To minify a project, run the following command:")
