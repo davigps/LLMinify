@@ -8,9 +8,16 @@ def list_llms():
     list_llms_handler.handle()
 
 
-@click.command(help="Minify a JavaScript project using Terser.")
-def terser():
-    run_terser_handler.handle()
+@click.command(
+    help="Minify a JavaScript project using Terser. Provide the directory project path to be minified."
+)
+@click.argument(
+    "folder_path",
+    type=click.Path(exists=True, file_okay=False, dir_okay=True, readable=True),
+    required=True,
+)
+def terser(folder_path: str):
+    run_terser_handler.handle(folder_path)
 
 
 @click.command(help="Minify a JavaScript project using a specific LLM.")
