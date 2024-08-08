@@ -1,14 +1,12 @@
 import logging
-import time
 
 import click
-
-TIMESTAMP_STRING = str(time.time()).replace(".", "_")
+from llminify.utils.timestamp import get_timestamp_string
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s: %(message)s",
-    filename=f"logs/{TIMESTAMP_STRING}-execution.log",
+    filename=f"logs/{get_timestamp_string()}-execution.log",
 )
 
 
