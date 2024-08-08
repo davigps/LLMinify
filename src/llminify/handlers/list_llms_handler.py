@@ -1,13 +1,14 @@
-import click
 from llminify.available_models import AVAILABLE_MODELS
+from llminify.utils.log import logger
 
 
 def handle():
-    click.echo("Available LLMs:")
+    logger.info("Available LLMs:")
     for model in AVAILABLE_MODELS:
-        click.echo(f"- {model}")
+        logger.info(f"- {model}")
 
-    click.echo("\nTo minify a project, run the following command:")
-    click.echo(
+    logger.info("")
+    logger.info("To minify a project, run the following command:")
+    logger.info(
         "pdm run start llm <model-name-here> --project <project-folder-name-here>"
     )

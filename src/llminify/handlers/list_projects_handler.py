@@ -1,5 +1,5 @@
-import click
+from llminify.utils.log import logger
 
 
 def handle():
-    click.echo("Minifying with LLM...")
+    logger.info("Minifying with LLM...")
