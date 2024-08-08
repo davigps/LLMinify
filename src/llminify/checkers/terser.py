@@ -1,6 +1,8 @@
-import os
+import subprocess
 
 
 def check_terser_is_available() -> bool:
-    status = os.system("npx terser --version")
-    return status == 0
+    result = subprocess.run(
+        ["npx", "terser", "--version"], capture_output=True, text=True
+    )
+    return result.returncode == 0

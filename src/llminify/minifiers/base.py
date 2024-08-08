@@ -41,12 +41,13 @@ class BaseMinifier:
         for file_path in files:
             file_extension = os.path.splitext(file_path)[1]
 
-            minified_content = self._read_file(file_path)
             if file_extension == ".js":
-                minified_content = self.minify_file(file_path)
+                content = self.minify_file(file_path)
+            else:
+                content = self._read_file(file_path)
 
             relative_path = os.path.relpath(file_path, project_dir_path)
             minified_file_path = os.path.join(project_out_path, relative_path)
-            self._save_file(minified_content, minified_file_path)
+            self._save_file(content, minified_file_path)
 
         return project_out_path
