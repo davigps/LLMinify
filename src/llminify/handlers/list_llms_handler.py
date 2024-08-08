@@ -1,6 +1,5 @@
 import click
-
-from available_models import AVAILABLE_MODELS
+from llminify.available_models import AVAILABLE_MODELS
 
 
 def handle():

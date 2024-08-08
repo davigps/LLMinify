@@ -1,4 +1,4 @@
-import commands
+import llminify.commands as commands
 
 if __name__ == "__main__":
     commands.app()

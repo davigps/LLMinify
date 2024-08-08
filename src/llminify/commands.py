@@ -1,6 +1,6 @@
 import click
 
-from handlers import (
+from llminify.handlers import (
     list_llms_handler,
     list_projects_handler,
     run_llm_handler,

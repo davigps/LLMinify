@@ -1,7 +1,7 @@
 [project]
 name = "LLMinify"
 version = "1.0.0"
-description = "Default template for PDM package"
+description = "Minify Javascript projects with LLMs"
 authors = [{ name = "Davi Sousa", email = "davi.gomes.sousa@ccc.ufcg.edu.br" }]
 dependencies = [
     "click>=8.1.7",
@@ -10,13 +10,17 @@ dependencies = [
     "langchain>=0.2.12",
     "langchain-anthropic>=0.1.22",
 ]
-requires-python = "==3.12.*"
+requires-python = ">=3.12"
 readme = "README.md"
 license = { text = "MIT" }
 
 
 [tool.pdm]
-distribution = false
+distribution = true
 
 [tool.pdm.scripts]
-start = "python src/main.py"
+start = "python -m llminify"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
