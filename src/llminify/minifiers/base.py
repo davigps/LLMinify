@@ -8,6 +8,9 @@ class BaseMinifier:
     def __init__(self, tool_name: str) -> None:
         self.tool_name = tool_name
 
+    def minify_file(self, file_path: str) -> str:
+        raise NotImplementedError()
+
     def _get_output_dir_path(self, input_dir_path: str):
         input_folder_name = os.path.basename(input_dir_path)
 
@@ -19,15 +22,11 @@ class BaseMinifier:
 
         return path
 
-    def minify_string(self, content: str) -> str:
-        return content
-
-    def minify_file(self, file_path: str) -> str:
+    def _read_file(self, file_path: str) -> str:
         content = None
         with open(file_path, "r") as file:
             content = file.read()
-
-        return self.minify_string(content)
+        return content
 
     def _save_file(self, content: str, output_path: str) -> None:
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -40,7 +39,11 @@ class BaseMinifier:
         files = get_all_files_from_dir(project_dir_path)
 
         for file_path in files:
-            minified_content = self.minify_file(file_path)
+            file_extension = os.path.splitext(file_path)[1]
+
+            minified_content = self._read_file(file_path)
+            if file_extension == ".js":
+                minified_content = self.minify_file(file_path)
 
             relative_path = os.path.relpath(file_path, project_dir_path)
             minified_file_path = os.path.join(project_out_path, relative_path)
