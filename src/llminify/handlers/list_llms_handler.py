@@ -9,6 +9,4 @@ def handle():
 
     logger.info("")
     logger.info("To minify a project, run the following command:")
-    logger.info(
-        "pdm run start llm <model-name-here> --project <project-folder-name-here>"
-    )
+    logger.info("pdm run start llm <project-folder-path> --model <model-name>")

@@ -1,5 +1,6 @@
 import click
 
+from llminify.available_models import AVAILABLE_MODELS
 from llminify.handlers import list_llms_handler, run_llm_handler, run_terser_handler
 
 
@@ -21,8 +22,18 @@ def terser(folder_path: str):
 
 
 @click.command(help="Minify a JavaScript project using a specific LLM.")
-def llm():
-    run_llm_handler.handle()
+@click.argument(
+    "folder_path",
+    type=click.Path(exists=True, file_okay=False, dir_okay=True, readable=True),
+    required=True,
+)
+@click.option(
+    "--model",
+    default=AVAILABLE_MODELS[0],
+    help=f"A model name available. The default model is {AVAILABLE_MODELS[0]}",
+)
+def llm(folder_path: str, model: str):
+    run_llm_handler.handle(folder_path, model)
 
 
 @click.group()

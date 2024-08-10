@@ -34,6 +34,12 @@ class BaseMinifier:
         with open(output_path, "w") as file:
             file.write(content)
 
+    def _copy_file(self, from_path: str, to_folder: str) -> None:
+        os.makedirs(to_folder, exist_ok=True)
+
+        to_path = os.path.join(to_folder, os.path.basename(from_path))
+        os.system(f"cp {from_path} {to_path}")
+
     def minify_files(self, project_dir_path: str) -> str:
         project_out_path = self._get_output_dir_path(project_dir_path)
         files = get_all_files_from_dir(project_dir_path)
@@ -41,13 +47,13 @@ class BaseMinifier:
         for file_path in files:
             file_extension = os.path.splitext(file_path)[1]
 
+            relative_path = os.path.relpath(file_path, project_dir_path)
+            destination_file_path = os.path.join(project_out_path, relative_path)
+
             if file_extension == ".js":
                 content = self.minify_file(file_path)
+                self._save_file(content, destination_file_path)
             else:
-                content = self._read_file(file_path)
-
-            relative_path = os.path.relpath(file_path, project_dir_path)
-            minified_file_path = os.path.join(project_out_path, relative_path)
-            self._save_file(content, minified_file_path)
+                self._copy_file(file_path, os.path.dirname(destination_file_path))
 
         return project_out_path
