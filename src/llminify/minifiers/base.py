@@ -38,7 +38,8 @@ class BaseMinifier:
         os.makedirs(to_folder, exist_ok=True)
 
         to_path = os.path.join(to_folder, os.path.basename(from_path))
-        os.system(f"cp {from_path} {to_path}")
+
+        os.system(f"cp '{from_path}' '{to_path}'")
 
     def minify_files(self, project_dir_path: str) -> str:
         project_out_path = self._get_output_dir_path(project_dir_path)
