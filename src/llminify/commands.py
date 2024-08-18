@@ -1,6 +1,6 @@
 import click
 
-from llminify.available_models import AVAILABLE_MODELS
+from llminify.available_models import DEFAULT_MODEL
 from llminify.handlers import list_llms_handler, run_llm_handler, run_terser_handler
 
 
@@ -29,8 +29,8 @@ def terser(folder_path: str):
 )
 @click.option(
     "--model",
-    default=AVAILABLE_MODELS[0],
-    help=f"A model name available. The default model is {AVAILABLE_MODELS[0]}",
+    default=DEFAULT_MODEL,
+    help=f"A model name available. The default model is {DEFAULT_MODEL}",
 )
 def llm(folder_path: str, model: str):
     run_llm_handler.handle(folder_path, model)
