@@ -1,5 +1,4 @@
-from langchain.chains.llm import LLMChain
-from langchain.chains.sequential import SimpleSequentialChain
+from langchain_core.output_parsers import StrOutputParser
 from llminify.available_models import get_model
 from llminify.minifiers.base import BaseMinifier
 from llminify.templates.minifier import minifier_prompt
@@ -13,14 +12,12 @@ class LlmMinifier(BaseMinifier):
     def minify_file(self, file_path: str) -> str:
         model = get_model(self.tool_name)
 
-        optimize_chain = LLMChain(llm=model, prompt=optimizer_prompt)
-        minify_chain = LLMChain(llm=model, prompt=minifier_prompt)
+        optimize_chain = optimizer_prompt | model | StrOutputParser()
+        minify_chain = minifier_prompt | model | StrOutputParser()
 
-        overall_chain = SimpleSequentialChain(
-            chains=[optimize_chain, minify_chain], verbose=True
-        )
+        overall_chain = optimize_chain | minify_chain
 
         content = self._read_file(file_path)
-        output = overall_chain.run(content)
+        output = overall_chain.invoke(input={"code": content})
 
         return output
