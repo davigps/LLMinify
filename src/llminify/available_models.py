@@ -1,7 +1,10 @@
 from langchain_anthropic import ChatAnthropic
 from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_openai import ChatOpenAI
 
-DEFAULT_MODEL = "claude-sonnet"
+from llminify.utils.env import EnvConfig
+
+DEFAULT_MODEL = EnvConfig().default_model
 
 AVAILABLE_MODELS = {
     "claude-sonnet": lambda: ChatAnthropic(
@@ -10,7 +13,10 @@ AVAILABLE_MODELS = {
         stop=None,
         base_url=None,
         api_key=None,
-    )
+    ),
+    "gpt4o": lambda: ChatOpenAI(
+        model="gpt-4o",
+    ),
 }
 
 

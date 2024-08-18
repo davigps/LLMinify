@@ -1,36 +1,44 @@
-// Initialize memoization array with known values
-const fibMemo = [0, 1];
+function solveNQueens(n) {
+	const board = new Array(n).fill().map(() => new Array(n).fill("."));
+	const solutions = [];
 
-function fibonacciMemo(n) {
-	// If we've already calculated this Fibonacci number, return it
-	if (fibMemo[n] !== undefined) {
-		return fibMemo[n];
+	function isSafe(row, col) {
+		// Check this row on left side
+		for (let i = 0; i < col; i++) {
+			if (board[row][i] === "Q") return false;
+		}
+
+		// Check upper diagonal on left side
+		for (let i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+			if (board[i][j] === "Q") return false;
+		}
+
+		// Check lower diagonal on left side
+		for (let i = row, j = col; j >= 0 && i < n; i++, j--) {
+			if (board[i][j] === "Q") return false;
+		}
+
+		return true;
 	}
 
-	// Calculate and store new Fibonacci numbers
-	for (let i = fibMemo.length; i <= n; i++) {
-		fibMemo[i] = fibMemo[i - 1] + fibMemo[i - 2];
+	function backtrack(col) {
+		if (col === n) {
+			solutions.push(board.map((row) => row.join("")));
+			return;
+		}
+
+		for (let i = 0; i < n; i++) {
+			if (isSafe(i, col)) {
+				board[i][col] = "Q";
+				backtrack(col + 1);
+				board[i][col] = ".";
+			}
+		}
 	}
 
-	return fibMemo[n];
-}
-
-function printFibonacci(n) {
-	fibonacciMemo(n); // Ensure we've calculated up to n
-	console.log(`The first ${n} Fibonacci numbers are:`);
-	for (let i = 0; i < n; i++) {
-		console.log(fibMemo[i]);
-	}
+	backtrack(0);
+	return solutions;
 }
 
 // Example usage
-printFibonacci(10);
-
-console.log("\nCalculating the 20th Fibonacci number:");
-console.log(fibonacciMemo(20));
-
-console.log("\nCalculating the 30th Fibonacci number:");
-console.log(fibonacciMemo(30));
-
-console.log("\nRecalculating the 20th Fibonacci number (should be instant):");
-console.log(fibonacciMemo(20));
+console.log(solveNQueens(4));
