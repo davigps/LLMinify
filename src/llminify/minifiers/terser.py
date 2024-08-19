@@ -11,4 +11,8 @@ class TerserMinifier(BaseMinifier):
         result = subprocess.run(
             ["npx", "terser", file_path], capture_output=True, text=True
         )
+
+        if result.returncode != 0:
+            raise RuntimeError(result.stderr)
+
         return str(result.stdout)

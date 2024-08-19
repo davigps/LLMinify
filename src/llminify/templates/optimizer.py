@@ -53,7 +53,7 @@ Optimize the following code:
 {code}
 ```
 
-Give me only the optimized code:
+Give me only the optimized code text:
 """
 
 optimizer_prompt = PromptTemplate(

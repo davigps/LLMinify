@@ -42,7 +42,7 @@ Minify the following code:
 {code}
 ```
 
-Give me only the minified code:
+Give me only the minified code text:
 """
 
 minifier_prompt = PromptTemplate(
