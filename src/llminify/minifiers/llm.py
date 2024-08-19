@@ -34,10 +34,10 @@ class LlmMinifier(BaseMinifier):
     def _minify_with_model(self, content: str) -> str:
         model = get_model(self.tool_name)
 
-        optimize_chain = optimizer_prompt | model | StrOutputParser()
-        minify_chain = minifier_prompt | model | StrOutputParser()
+        optimize_chain = optimizer_prompt | model
+        minify_chain = minifier_prompt | model
 
-        overall_chain = optimize_chain | minify_chain
+        overall_chain = optimize_chain | minify_chain | StrOutputParser()
         output = overall_chain.invoke(input={"code": content})
 
         return output

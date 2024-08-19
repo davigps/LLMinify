@@ -41,6 +41,8 @@ Minify the following code:
 ```
 {code}
 ```
+
+Give me only the minified code:
 """
 
 minifier_prompt = PromptTemplate(
