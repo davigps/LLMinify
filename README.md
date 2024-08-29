@@ -4,4 +4,4 @@ The idea of this project is to see how good we can minify projects using LLMs as
 
 ## Important
 
-- Only tested on Linux!
+- Only tested on Linux and MacOS!
