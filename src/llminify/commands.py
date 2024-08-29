@@ -32,8 +32,14 @@ def terser(folder_path: str):
     default=DEFAULT_MODEL,
     help=f"A model name available. The default model is {DEFAULT_MODEL}",
 )
-def llm(folder_path: str, model: str):
-    run_llm_handler.handle(folder_path, model)
+@click.option(
+    "--verbose",
+    is_flag=True,
+    default=False,
+    help="Show the output of the LLM in the console.",
+)
+def llm(folder_path: str, model: str, verbose: bool):
+    run_llm_handler.handle(folder_path, model, verbose)
 
 
 @click.group()

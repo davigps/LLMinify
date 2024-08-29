@@ -43,12 +43,16 @@ class LlmMinifier(BaseMinifier):
         content = self._read_file(file_path)
 
         def use_llm_and_terser():
+            logger.info(f"Minifying {file_path}...")
+
             minified = self._minify_with_model(content)
 
             tmp_file_path = self._save_on_temp_file(minified)
-            minified = self._minify_with_terser(tmp_file_path)
+            try:
+                minified = self._minify_with_terser(tmp_file_path)
+            finally:
+                os.remove(tmp_file_path)
 
-            os.remove(tmp_file_path)
             return minified
 
         return self._retry_action_if_needed(use_llm_and_terser)
