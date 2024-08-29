@@ -3,12 +3,15 @@ from langchain.prompts import PromptTemplate
 content = """
 You are a code minifier, you job is to minify the code provided without changing its objectives.
 Pay attention:
+
+- Make sure the code does the same thing as the original code
 - You should rewrite the code to be smaller
 - It can be worse in readability
 - You should use the same names for external functions
 - You should use the same names for external variables
 - You can use different indentation levels
 - You can use different code structures
+
 Only return the minified code, without any explanations or comments.
 
 Examples of minifications:
