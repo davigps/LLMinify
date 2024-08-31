@@ -12,12 +12,14 @@ def handle_js_files_sizes(folder_path: str) -> None:
 
     for root, dirs, files in os.walk(folder_path):
         for file in files:
-            if file.endswith(".js"):
-                file_path = os.path.join(root, file)
-                file_size = os.path.getsize(file_path)
+            if not file.endswith(".js"):
+                continue
 
-                total_size += file_size
-                logger.info(f"File: {file_path}, Size: {file_size} bytes")
+            file_path = os.path.join(root, file)
+            file_size = os.path.getsize(file_path)
+
+            total_size += file_size
+            logger.info(f"File: {file_path}, Size: {file_size} bytes")
 
     logger.info(f"Total size of .js files: {total_size} bytes")
 
@@ -30,22 +32,24 @@ def handle_js_complexity(folder_path: str):
     complexity_results = []
     for root, dirs, files in os.walk(folder_path):
         for file in files:
-            if file.endswith(".js"):
-                file_path = os.path.join(root, file)
+            if not file.endswith(".js"):
+                continue
 
-                logger.info(f"Analyzing {file_path}")
+            file_path = os.path.join(root, file)
 
-                result = subprocess.run(
-                    ["npx", "cyclomatic-complexity", file_path, "-j"],
-                    capture_output=True,
-                    text=True,
-                )
+            logger.info(f"Analyzing {file_path}")
 
-                if result.returncode != 0:
-                    raise RuntimeError(result.stderr)
+            result = subprocess.run(
+                ["npx", "cyclomatic-complexity", file_path, "-j"],
+                capture_output=True,
+                text=True,
+            )
 
-                result = json.loads(str(result.stdout))
-                complexity_results.extend(result)
+            if result.returncode != 0:
+                raise RuntimeError(result.stderr)
+
+            result = json.loads(str(result.stdout))
+            complexity_results.extend(result)
 
     total_complexity = sum(
         [complexity.get("complexitySum", 0) for complexity in complexity_results]
