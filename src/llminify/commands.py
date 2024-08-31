@@ -27,7 +27,7 @@ def js_size(folder_path: str):
 
 
 @click.command(
-    help="Get the complexity of a JavaScript project folder. Provide the directory project path."
+    help="Get the cyclomatic complexity of a JavaScript project folder. Provide the directory project path."
 )
 @click.argument(
     "folder_path",
