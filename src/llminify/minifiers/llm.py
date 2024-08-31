@@ -6,7 +6,6 @@ from llminify.available_models import get_model
 from llminify.minifiers.base import BaseMinifier
 from llminify.minifiers.terser import TerserMinifier
 from llminify.templates.minifier import minifier_prompt
-from llminify.templates.optimizer import optimizer_prompt
 from llminify.utils.timestamp import get_timestamp_string
 from llminify.utils.log import logger
 
@@ -60,11 +59,8 @@ class LlmMinifier(BaseMinifier):
     def _minify_with_model(self, content: str) -> str:
         model = get_model(self.tool_name)
 
-        optimize_chain = optimizer_prompt | model | StrOutputParser()
         minify_chain = minifier_prompt | model | StrOutputParser()
-
-        overall_chain = optimize_chain | minify_chain
-        output = overall_chain.invoke(input={"code": content})
+        output = minify_chain.invoke(input={"code": content})
 
         return output
 
