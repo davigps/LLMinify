@@ -1,0 +1,1 @@
+function solve(){var a=readline().split(' '),b=parseInt(a[0]),c=parseInt(a[1]),d=parseInt(a[2]),e=parseInt(a[3]),f=0;((b>d&&c>=e)||(b>=d&&c>e))&&f++;((b>e&&c>=d)||(b>=e&&c>d))&&f++;((c>d&&b>=e)||(c>=d&&b>e))&&f++;((c>e&&b>=d)||(c>=e&&b>d))&&f++;print(f)}var test=parseInt(readline());while(test--)solve();

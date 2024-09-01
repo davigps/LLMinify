@@ -1,0 +1,1 @@
+const isItPossibleToSort=(a,k)=>k>1?'YES':a.every((v,i)=>i==0||v>=a[i-1])?'YES':'NO';for(let i=+readline();i--;)readline(),print(isItPossibleToSort(readline().split(' ').map(Number),readline().split(' ')[1]))

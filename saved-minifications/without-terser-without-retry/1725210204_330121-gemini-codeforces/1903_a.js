@@ -1,0 +1,1 @@
+const isItPossibleToSort=(a,k)=>{if(k>1){return"YES"}for(var j=1;j<a.length;j++){if(a[j-1]>a[j]){return"NO"}}return"YES"};var t=+readline();for(var i=0;i<t;i++){var v=readline().split(" ").map(item=>+item);print(isItPossibleToSort(readline().split(" ").map(item=>+item),v[1]))}

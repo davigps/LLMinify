@@ -1,0 +1,1 @@
+r=readline;for(x=+r();x;x--){s=r().split("");t=r().split("");i=0;for(j=0;j<s.length;j++){s[j]=="?"&&t[i]?s[j]=t[i]:s[j]==t[i]&&i<t.length&&i++;s[j]=="?"&&(s[j]="a")}print(i==t.length?"YES\n"+s.join(""):"NO")}

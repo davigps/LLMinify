@@ -1,0 +1,1 @@
+function solve(){var[x,y,k]=readline().split(' ').map(Number);k%2?(print(x+' '+y),k--):0;for(var i=0;i<k;i+=2){print(`${x+i+1} ${y+i+1}`);print(`${x-i-1} ${y-i-1}`)}}function main(){for(var t=parseInt(readline(),10);t--;)solve()}main();

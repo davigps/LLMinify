@@ -1,0 +1,1 @@
+const lines=parseInt(readline());for(let l=0;l<lines;l++){const n=parseInt(readline()),s=readline(),a=Array(n).fill(-1);let k=0,t=0;for(let i=n-1;i>=0;i--)s[i]==="1"?t++:(a[k]=t+(a[k-1]||0),k++);print(a.join(" "))}

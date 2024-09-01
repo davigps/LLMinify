@@ -1,0 +1,1 @@
+const getMinCountOfOperations=(s,t)=>{let c=0;while(s.length<=50){if(s.includes(t))return c;s+=s;c++}return-1},t=+readline();for(let i=0;i<t;i++)readline(),print(getMinCountOfOperations(readline(),readline()))

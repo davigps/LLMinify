@@ -1,0 +1,1 @@
+function main(){var t=parseInt(readline(),10);for(var e=0;e<t;e++){var r=readline().split(" ").map(function(t){return parseInt(t,10)}),a=r[0],n=r[1],i=r[2],l=a;if(a<n){var u=n-a;l=u>i?a+i+2*(u-i):n}print(l+"\n")}}main();

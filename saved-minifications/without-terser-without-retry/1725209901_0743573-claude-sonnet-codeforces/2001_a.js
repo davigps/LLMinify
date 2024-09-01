@@ -1,0 +1,1 @@
+const t=parseInt(readline().trim()),s=()=>{const n=parseInt(readline().trim()),a=readline().split(" ").map(u=>parseInt(u)),c=new Array(102).fill(0);for(let u of a)c[u]++;let m=0;for(let i=0;i<=102;i++)c[i]>c[m]&&(m=i);print(n-c[m])};for(let i=0;i<t;i++)s()

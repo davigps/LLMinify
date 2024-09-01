@@ -1,0 +1,1 @@
+const{readline,print}=require('@ip-algorithmics/codeforces-io');"use strict";const l=parseInt(readline());for(let e=0;e<l;e++){const l=parseInt(readline()),s=readline(),n=new Array(l).fill(-1);let t=0,a=0;for(let e=l-1;e>=0;e--)"1"===s[e]?a++:(n[t]=a+(n[t-1]||0),t++);print(n.join(" "))}

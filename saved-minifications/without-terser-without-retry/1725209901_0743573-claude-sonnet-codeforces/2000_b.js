@@ -1,0 +1,1 @@
+const isTheAllPassengersFollowedTheRecommendations=a=>{let r=new Array(a.length+2).fill(0);r[a[0]]++;for(let i=1;i<a.length;i++){let x=a[i];if(r[x-1]||r[x+1]){r[x]++;continue}return'NO'}return'YES'};for(let i=0,t=+readline();i<t;i++){readline();print(isTheAllPassengersFollowedTheRecommendations(readline().split(' ').map(Number)))}

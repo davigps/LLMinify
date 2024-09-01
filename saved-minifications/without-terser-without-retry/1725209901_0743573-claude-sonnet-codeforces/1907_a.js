@@ -1,0 +1,1 @@
+function solve(){for(var t=parseInt(readline());t--;){var p=readline(),f=p[0],r=parseInt(p[1]);for(var c='a';c<='h';c=String.fromCharCode(c.charCodeAt(0)+1))c!==f&&print(c+p[1]);for(var i=1;i<=8;i++)i!==r&&print(p[0]+i)}}solve();
