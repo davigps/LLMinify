@@ -1,4 +1,5 @@
 import os
+import time
 from typing import Callable, TypeVar
 
 from langchain_core.output_parsers import StrOutputParser
@@ -30,9 +31,16 @@ class LlmMinifier(BaseMinifier):
             try:
                 return action(*args, **kwargs)
             except Exception as e:
-                logger.warning(f"Retrying {action.__name__} due to error: {e}")
-
                 last_exception = e
+
+                sleep_time = 1
+                if "429" in str(last_exception):
+                    sleep_time = 35
+                time.sleep(sleep_time)
+
+                logger.warning(
+                    f"Retrying {action.__name__} after {sleep_time} seconds due to error: {e}"
+                )
 
         raise last_exception
 
