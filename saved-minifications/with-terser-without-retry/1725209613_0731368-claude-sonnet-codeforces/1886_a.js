@@ -1,0 +1,1 @@
+var i,t,n,x,y,z;for(t=readline(),i=0;i<t;i++)if(n=readline(),n<=3)print("NO");else if(n%2==0){for(n--,z=1,x=n/2|0,y=n-x;y!=z&&(y%3==0&&x%3==0);)y%3==0||x%3==0?(x++,y--):0;y==z||x==z?print("NO"):(print("YES"),print(x+" "+y+" 1"))}else{for(n-=2,z=2,x=n/2|0,y=n-x;y!=z&&(y%3==0&&x%3==0);)y%3==0||x%3==0?(x++,y--):0;y==z||x==z?print("NO"):(print("YES"),print(x+" "+y+" 2"))}

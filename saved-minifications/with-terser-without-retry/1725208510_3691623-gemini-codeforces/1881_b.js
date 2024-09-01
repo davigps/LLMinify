@@ -1,0 +1,1 @@
+x=+readline();while(x--){const e=a=>a.every((e=>e===a[0]));t=readline().split(" ").map(Number);for(i=0;i<3;i++){c=e(t);if(c===!0)break;t.sort(((e,a)=>e-a));m=t[0];p=t.pop();p-=m;t.push(m);t.push(p)}c=e(t);c===!0?print("YES"):print("NO")}

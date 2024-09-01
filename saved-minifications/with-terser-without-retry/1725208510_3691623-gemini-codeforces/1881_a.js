@@ -1,0 +1,1 @@
+const getMinCountOfOperations=(s1,s2)=>{var c=0;while(s1.length<=50){if(s1.indexOf(s2)!==-1){return c}s1+=s1;c++}return-1};var t=+readline();for(var i=0;i<t;i++){readline();print(getMinCountOfOperations(readline(),readline()))}

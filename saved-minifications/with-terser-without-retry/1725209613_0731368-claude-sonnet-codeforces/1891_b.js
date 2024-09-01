@@ -1,0 +1,1 @@
+var t=parseInt(readline());for(var a0=0;a0<t;a0++){var[n,q]=readline().split(" ").map((x=>parseInt(x))),a=readline().split(" ").map((x=>parseInt(x))),b=readline().split(" ").map((x=>parseInt(x))),s=new Set(b);for(var p of s){var m=2**p;for(var i=0;i<n;i++)a[i]%m==0&&(a[i]+=m/2)}print(a.join(" "))}

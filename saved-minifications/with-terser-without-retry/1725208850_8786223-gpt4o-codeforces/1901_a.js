@@ -1,0 +1,1 @@
+const getMinVolume=(a,x)=>{var v=[a[0]];for(var j=1;j<a.length;j++)v.push(a[j]-a[j-1]);return Math.max(...v,(x-a[a.length-1])*2)};var t=+readline();for(var i=0;i<t;i++){var v=readline().split(" ").map((i=>+i));print(getMinVolume(readline().split(" ").map((i=>+i)),v[1]))}

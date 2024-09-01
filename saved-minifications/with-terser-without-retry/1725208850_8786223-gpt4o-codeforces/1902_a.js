@@ -1,0 +1,1 @@
+var t=parseInt(readline(),10);for(var i=0;i<t;i++){var n=parseInt(readline(),10),s=readline(),containsZero=!1;for(var j=0;j<n;j++)if(s[j]==="0"){containsZero=!0;break}containsZero?print("YES\n"):print("NO\n")}

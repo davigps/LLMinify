@@ -1,0 +1,1 @@
+const getMinVolume=(a,x)=>{let v=[a[0]];for(let j=1;j<a.length;j++)v.push(a[j]-a[j-1]);return Math.max(...v,(x-a[a.length-1])*2)};for(let i=0,t=+readline();i<t;i++){let[,x]=readline().split(" ").map(Number);print(getMinVolume(readline().split(" ").map(Number),x))}

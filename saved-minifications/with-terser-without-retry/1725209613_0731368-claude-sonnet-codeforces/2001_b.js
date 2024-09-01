@@ -1,0 +1,1 @@
+function solve(){var n=parseInt(readline());if(n%2===1){var r=n,l=1,result=[];for(var i=1;i<=n;i++)i%2===1?(result.push(r),r--):(result.push(l),l++);print(result.join(" "))}else print(-1)}function main(){for(var t=parseInt(readline());t--;)solve()}main();

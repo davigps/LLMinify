@@ -1,0 +1,1 @@
+for(var t=parseInt(readline()),i=0;i<t;i++){var[n,s,m]=readline().split(" ").map(Number),intervals=[];for(var j=0;j<n;j++)intervals.push(readline().split(" ").map(Number));var c=!1;intervals[0][0]>=s&&(c=!0);for(var j=1;j<intervals.length;j++)if(intervals[j][0]-intervals[j-1][1]>=s){c=!0;break}m-intervals[intervals.length-1][1]>=s&&(c=!0);print(c?"YES":"NO")}
