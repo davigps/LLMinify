@@ -1,5 +1,6 @@
 from langchain_anthropic import ChatAnthropic
 from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
 
 from llminify.utils.env import EnvConfig
@@ -16,6 +17,9 @@ AVAILABLE_MODELS = {
     ),
     "gpt4o": lambda: ChatOpenAI(
         model="gpt-4o",
+    ),
+    "gemini": lambda: ChatGoogleGenerativeAI(
+        model="gemini-1.5-pro",
     ),
 }
 
