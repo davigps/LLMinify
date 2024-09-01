@@ -1,0 +1,1 @@
+const isItPossibleToSort=(a,k)=>k>1?"YES":a.some(((n,i)=>a[i-1]>n))?"NO":"YES";var t=+readline();for(var i=0;i<t;i++){var s=readline().split(" ").map((item=>+item));print(isItPossibleToSort(readline().split(" ").map((item=>+item)),s[1]))}

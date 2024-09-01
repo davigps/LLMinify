@@ -1,0 +1,1 @@
+function divideTable(n,t){var fL=0,fO=0;for(var i=0;i<n;i++)"L"===t[i]?fL++:fO++;var mL=0,mO=0;for(var i=0;i<n;i++){"L"===t[i]?(mL++,fL--):(mO++,fO--);if(fL+fO>0&&fL!=mL&&fO!=mO&&mL+mO>0)return mL+mO}return-1}var x=parseInt(readline()),table=readline();print(divideTable(x,table));

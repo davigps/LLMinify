@@ -1,0 +1,1 @@
+const isTheAllPassengersFollowedTheRecommendations=a=>{var r=new Array(a.length+2).fill(0);r[a[0]]++;for(var t=1;t<a.length;t++){var e=a[t];if(r[e-1]!==0||r[e+1]!==0){r[e]++;continue}return"NO"}return"YES"};var t=+readline();for(var i=0;i<t;i++){readline();print(isTheAllPassengersFollowedTheRecommendations(readline().split(" ").map((a=>+a))))}

@@ -1,9 +1,8 @@
 import os
 import time
-from typing import Callable, TypeVar
+from typing import Callable, Optional, TypeVar
 
 from langchain_core.output_parsers import StrOutputParser
-
 from llminify.available_models import get_model
 from llminify.minifiers.base import BaseMinifier
 from llminify.minifiers.terser import TerserMinifier
@@ -18,13 +17,20 @@ class LlmMinifier(BaseMinifier):
     MAX_RETRIES = 5
 
     def __init__(
-        self, model: str, use_terser: bool, excluded_folders: list[str]
+        self,
+        model: str,
+        use_terser: bool,
+        excluded_folders: list[str],
+        ignore_failed: bool,
     ) -> None:
         self.terser_minifier = TerserMinifier(excluded_folders)
         self.use_terser = use_terser
+        self.ignore_failed = ignore_failed
         super().__init__(model, excluded_folders)
 
-    def _retry_action_if_needed(self, action: Callable[..., T], *args, **kwargs) -> T:
+    def _retry_action_if_needed(
+        self, action: Callable[..., T], *args, **kwargs
+    ) -> Optional[T]:
         last_exception = RuntimeError("Max retries reached")
 
         for _ in range(self.MAX_RETRIES):
@@ -42,7 +48,11 @@ class LlmMinifier(BaseMinifier):
                     f"Retrying {action.__name__} after {sleep_time} seconds due to error: {e}"
                 )
 
-        raise last_exception
+        if not self.ignore_failed:
+            raise last_exception
+
+        logger.warning("Failed to minify file...")
+        return None
 
     def _save_on_temp_file(self, content: str) -> str:
         file_path = f"./tmp-{get_timestamp_string()}"
@@ -66,7 +76,11 @@ class LlmMinifier(BaseMinifier):
 
             return minified
 
-        return self._retry_action_if_needed(use_llm_and_terser)
+        minified_file = self._retry_action_if_needed(use_llm_and_terser)
+        if minified_file is None:
+            minified_file = content
+
+        return minified_file
 
     def _minify_with_model(self, content: str) -> str:
         model = get_model(self.tool_name)

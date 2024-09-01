@@ -1,0 +1,1 @@
+function solve(){var i=readline().split(" "),a1=parseInt(i[0]),a2=parseInt(i[1]),b1=parseInt(i[2]),b2=parseInt(i[3]),r=0;if(a1>b1&&a2>=b2||a1>=b1&&a2>b2)r++;if(a1>b2&&a2>=b1||a1>=b2&&a2>b1)r++;if(a2>b1&&a1>=b2||a2>=b1&&a1>b2)r++;if(a2>b2&&a1>=b1||a2>=b2&&a1>b1)r++;print(r)}var test=parseInt(readline());while(test--)solve();

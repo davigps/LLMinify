@@ -1,0 +1,1 @@
+function solution(){var s=readline(),n=s.length;for(var x=Math.floor(n/2)+1;x<n;++x)if(s.substr(0,x)===s.substr(n-x)){print("YES");print(s.substr(0,x));return}print("NO")}var t=1;while(t--)solution();

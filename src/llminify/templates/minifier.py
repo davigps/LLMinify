@@ -1,7 +1,7 @@
 from langchain.prompts import PromptTemplate
 
 content = """
-You are a code minifier, you job is to minify the code provided without changing its objectives.
+You are a Javascript code minifier, you job is to minify the code provided without changing its objectives.
 Pay attention:
 
 - Make sure the code does the same thing as the original code
@@ -11,6 +11,7 @@ Pay attention:
 - You should use the same names for external variables
 - You can use different indentation levels
 - You can use different code structures
+- Your output code should by only javascript
 
 Only return the minified code, without any explanations or comments.
 
@@ -47,7 +48,7 @@ function factorial(n) {{
   }}
   return n * factorial(n - 1);
 }}
-  
+
 console.log(factorial(5));
 
 class TaskManager {{

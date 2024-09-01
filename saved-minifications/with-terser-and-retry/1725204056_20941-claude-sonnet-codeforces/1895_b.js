@@ -1,0 +1,1 @@
+for(var t=parseInt(readline(),10),_=0;_<t;_++){var n=parseInt(readline(),10),c=readline().split(" ").map((x=>parseInt(x,10)));c.sort(((a,b)=>a-b));for(var diff=0,i=1;i<n;i++)diff+=c[i]-c[i-1]+c[i+n]-c[i+n-1];print(diff+"\n");for(i=0;i<n;i++)print(c[i]+" "+c[i+n]+"\n")}

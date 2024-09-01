@@ -1,0 +1,1 @@
+var t=parseInt(readline());for(;t--;){var n=parseInt(readline()),a=readline().split(" ").map(Number),sum=0;if(n%2==0)for(var i=0;i<n;i+=2)sum+=a[i]-a[i+1];else{for(var i=0;i<n-1;i+=2)sum+=a[i]-a[i+1];sum+=a[n-1]}print(sum)}

@@ -1,0 +1,1 @@
+function f(){var s=readline();s.substr(0,2)==="10"?s[2]!=="0"&&s.length>3?print("yes"):print(s[2]>="2"?"yes":"no"):print("no")}function main(){for(var n=parseInt(readline(),10),i=0;i<n;i++)f()}main();

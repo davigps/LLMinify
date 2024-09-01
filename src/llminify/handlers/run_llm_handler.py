@@ -1,12 +1,16 @@
 from langchain.globals import set_debug, set_verbose
-
 from llminify.checkers.terser import check_terser_is_available
 from llminify.minifiers.llm import LlmMinifier
 from llminify.utils.log import logger
 
 
 def handle(
-    project_dir_path: str, exclude: str, model: str, verbose: bool, use_terser: bool
+    project_dir_path: str,
+    exclude: str,
+    model: str,
+    verbose: bool,
+    use_terser: bool,
+    ignore_failed: bool,
 ):
     check_terser_is_available()
 
@@ -21,9 +25,9 @@ def handle(
     if use_terser:
         logger.info("Using terser for minification...")
 
-    output_path = LlmMinifier(model, use_terser, excluded_folders).minify_files(
-        project_dir_path
-    )
+    output_path = LlmMinifier(
+        model, use_terser, excluded_folders, ignore_failed
+    ).minify_files(project_dir_path)
 
     logger.info(
         f"Minification completed successfully. Output available at {output_path}"

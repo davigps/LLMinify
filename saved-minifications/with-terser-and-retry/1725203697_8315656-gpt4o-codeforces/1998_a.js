@@ -1,0 +1,1 @@
+function solve(){var a=readline().split(" "),b=parseInt(a[0],10),c=parseInt(a[1],10),d=parseInt(a[2],10);if(d%2==0)for(var e=0;e<d;e+=2)print(b+e+1+" "+(c+e+1)),print(b-e-1+" "+(c-e-1));else{print(b+" "+c);d--;for(var e=0;e<d;e+=2)print(b+e+1+" "+(c+e+1)),print(b-e-1+" "+(c-e-1))}}function main(){for(var a=parseInt(readline(),10);a--;)solve()}main();

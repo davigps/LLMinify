@@ -1,0 +1,1 @@
+const lines=parseInt(readline());for(let line=0;line<lines;line++){const[x,k]=readline().split(" ").map(Number);let n=x;const s=n=>n.toString().split("").reduce(((a,b)=>a+parseInt(b)),0);while(s(n)%k)n++;print(n)}

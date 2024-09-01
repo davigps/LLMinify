@@ -1,0 +1,1 @@
+"use strict";const lines=parseInt(readline());for(let line=0;line<lines;line++){const n=parseInt(readline()),s=readline(),ans=new Array(n).fill(-1);let k=0,tmp=0;for(let i=n-1;i>=0;i--)s[i]==="1"?tmp++:(ans[k]=tmp+(ans[k-1]||0),k+=1);print(ans.join(" "))}

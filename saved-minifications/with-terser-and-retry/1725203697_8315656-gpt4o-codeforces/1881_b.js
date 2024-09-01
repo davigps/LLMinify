@@ -1,0 +1,1 @@
+x=+readline();while(x--){const allEqual=a=>a.every((v=>v===a[0]));threadlets=readline().split(" ").map(Number);for(i=0;i<3;i++){check=allEqual(threadlets);if(check)break;threadlets=threadlets.sort(((a,b)=>a-b));min=threadlets[0];temp=threadlets.pop();temp-=min;threadlets.push(min,temp)}check=allEqual(threadlets);print(check?"YES":"NO")}

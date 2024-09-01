@@ -1,0 +1,1 @@
+var t=parseInt(readline(),10);for(;t--;){var[n,k]=readline().split(" ").map((x=>parseInt(x,10))),lst=readline().split(" ").map((x=>parseInt(x,10))).sort(((a,b)=>b-a)),a=0,b=0;for(var i=0;i<n;i++)if(i%2)b+=lst[i]+Math.min(lst[i-1]-lst[i],k),k-=Math.min(lst[i-1]-lst[i],k);else a+=lst[i];print(a-b)}

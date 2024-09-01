@@ -79,14 +79,29 @@ def terser(folder_path: str, exclude: str):
     help="Show the output of the LLM in the console.",
 )
 @click.option(
+    "--ignore-failed",
+    is_flag=True,
+    default=False,
+    help="Show the output of the LLM in the console.",
+)
+@click.option(
     "--use-terser",
     default=True,
     type=click.BOOL,
     show_default=True,
     help="Minify the generated output with terser cli.",
 )
-def llm(folder_path: str, exclude: str, model: str, verbose: bool, use_terser: bool):
-    run_llm_handler.handle(folder_path, exclude, model, verbose, use_terser)
+def llm(
+    folder_path: str,
+    exclude: str,
+    model: str,
+    verbose: bool,
+    use_terser: bool,
+    ignore_failed: bool,
+):
+    run_llm_handler.handle(
+        folder_path, exclude, model, verbose, use_terser, ignore_failed
+    )
 
 
 @click.group()

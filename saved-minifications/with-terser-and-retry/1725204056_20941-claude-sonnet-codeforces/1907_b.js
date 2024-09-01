@@ -1,0 +1,1 @@
+const t=+readline();for(var i=0;i<t;i++){var s=readline().split(""),l=[],u=[];for(var j=0;j<s.length;j++)s[j]=="B"?(s[j]="",u.length>0&&(s[u.pop()]="")):s[j]=="b"?(s[j]="",l.length>0&&(s[l.pop()]="")):s[j]==s[j].toLowerCase()?l.push(j):u.push(j);print(s.join(""))}
