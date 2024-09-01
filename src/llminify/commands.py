@@ -8,6 +8,14 @@ from llminify.handlers import (
     run_terser_handler,
 )
 
+excluded_folders_option = click.option(
+    "--exclude",
+    help="Exclude folders from the minification. Default is only node_modules. Separate folders by using comma ','. Ex: --exclude node_modules,test",
+    type=click.STRING,
+    default="node_modules",
+    show_default=True,
+)
+
 
 @click.command(help="List all available LLMs.")
 def list_llms():
@@ -46,8 +54,9 @@ def js_complexity(folder_path: str):
     type=click.Path(exists=True, file_okay=False, dir_okay=True, readable=True),
     required=True,
 )
-def terser(folder_path: str):
-    run_terser_handler.handle(folder_path)
+@excluded_folders_option
+def terser(folder_path: str, exclude: str):
+    run_terser_handler.handle(folder_path, exclude)
 
 
 @click.command(help="Minify a JavaScript project using a specific LLM.")
@@ -56,10 +65,12 @@ def terser(folder_path: str):
     type=click.Path(exists=True, file_okay=False, dir_okay=True, readable=True),
     required=True,
 )
+@excluded_folders_option
 @click.option(
     "--model",
     default=DEFAULT_MODEL,
-    help=f"A model name available. The default model is {DEFAULT_MODEL}",
+    show_default=True,
+    help="A model name available.",
 )
 @click.option(
     "--verbose",
@@ -71,10 +82,11 @@ def terser(folder_path: str):
     "--use-terser",
     default=True,
     type=click.BOOL,
+    show_default=True,
     help="Minify the generated output with terser cli.",
 )
-def llm(folder_path: str, model: str, verbose: bool, use_terser: bool):
-    run_llm_handler.handle(folder_path, model, verbose, use_terser)
+def llm(folder_path: str, exclude: str, model: str, verbose: bool, use_terser: bool):
+    run_llm_handler.handle(folder_path, exclude, model, verbose, use_terser)
 
 
 @click.group()

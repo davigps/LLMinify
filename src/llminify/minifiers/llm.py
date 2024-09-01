@@ -16,10 +16,12 @@ T = TypeVar("T")
 class LlmMinifier(BaseMinifier):
     MAX_RETRIES = 5
 
-    def __init__(self, model: str, use_terser: bool) -> None:
-        self.terser_minifier = TerserMinifier()
+    def __init__(
+        self, model: str, use_terser: bool, excluded_folders: list[str]
+    ) -> None:
+        self.terser_minifier = TerserMinifier(excluded_folders)
         self.use_terser = use_terser
-        super().__init__(model)
+        super().__init__(model, excluded_folders)
 
     def _retry_action_if_needed(self, action: Callable[..., T], *args, **kwargs) -> T:
         last_exception = RuntimeError("Max retries reached")

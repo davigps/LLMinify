@@ -1,12 +1,14 @@
 import os
 
 from llminify.file_explorer import get_all_files_from_dir
+from llminify.utils.log import logger
 from llminify.utils.timestamp import get_timestamp_string
 
 
 class BaseMinifier:
-    def __init__(self, tool_name: str) -> None:
+    def __init__(self, tool_name: str, excluded_folders: list[str]) -> None:
         self.tool_name = tool_name
+        self.excluded_folders = excluded_folders
 
     def minify_file(self, file_path: str) -> str:
         raise NotImplementedError()
@@ -51,10 +53,21 @@ class BaseMinifier:
             relative_path = os.path.relpath(file_path, project_dir_path)
             destination_file_path = os.path.join(project_out_path, relative_path)
 
-            if not file_path.endswith(".min.js") and file_extension == ".js":
+            should_minify_file = (
+                not file_path.endswith(".min.js")
+                and file_extension == ".js"
+                and all(
+                    excluded_folder not in file_path
+                    for excluded_folder in self.excluded_folders
+                )
+            )
+
+            if should_minify_file:
                 content = self.minify_file(file_path)
                 self._save_file(content, destination_file_path)
             else:
+                logger.warning(f"Ignoring {file_path}...")
+
                 self._copy_file(file_path, os.path.dirname(destination_file_path))
 
         return project_out_path
