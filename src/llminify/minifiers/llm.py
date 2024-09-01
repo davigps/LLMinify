@@ -22,10 +22,12 @@ class LlmMinifier(BaseMinifier):
         use_terser: bool,
         excluded_folders: list[str],
         ignore_failed: bool,
+        with_retry: bool,
     ) -> None:
         self.terser_minifier = TerserMinifier(excluded_folders)
         self.use_terser = use_terser
         self.ignore_failed = ignore_failed
+        self.with_retry = with_retry
         super().__init__(model, excluded_folders)
 
     def _retry_action_if_needed(
@@ -38,6 +40,9 @@ class LlmMinifier(BaseMinifier):
                 return action(*args, **kwargs)
             except Exception as e:
                 last_exception = e
+
+                if not self.with_retry:
+                    break
 
                 sleep_time = 1
                 if "429" in str(last_exception):

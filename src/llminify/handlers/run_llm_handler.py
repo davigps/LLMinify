@@ -9,8 +9,9 @@ def handle(
     exclude: str,
     model: str,
     verbose: bool,
-    use_terser: bool,
     ignore_failed: bool,
+    use_terser: bool,
+    with_retry: bool,
 ):
     check_terser_is_available()
 
@@ -26,7 +27,7 @@ def handle(
         logger.info("Using terser for minification...")
 
     output_path = LlmMinifier(
-        model, use_terser, excluded_folders, ignore_failed
+        model, use_terser, excluded_folders, ignore_failed, with_retry
     ).minify_files(project_dir_path)
 
     logger.info(

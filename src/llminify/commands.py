@@ -91,16 +91,24 @@ def terser(folder_path: str, exclude: str):
     show_default=True,
     help="Minify the generated output with terser cli.",
 )
+@click.option(
+    "--with-retry",
+    default=True,
+    type=click.BOOL,
+    show_default=True,
+    help="Retry minification if Terser CLI failed.",
+)
 def llm(
     folder_path: str,
     exclude: str,
     model: str,
     verbose: bool,
-    use_terser: bool,
     ignore_failed: bool,
+    use_terser: bool,
+    with_retry: bool,
 ):
     run_llm_handler.handle(
-        folder_path, exclude, model, verbose, use_terser, ignore_failed
+        folder_path, exclude, model, verbose, ignore_failed, use_terser, with_retry
     )
 
 
