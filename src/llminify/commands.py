@@ -2,10 +2,10 @@ import click
 
 from llminify.available_models import DEFAULT_MODEL
 from llminify.handlers import (
+    js_handler,
     list_llms_handler,
     run_llm_handler,
     run_terser_handler,
-    js_handler,
 )
 
 
@@ -67,8 +67,14 @@ def terser(folder_path: str):
     default=False,
     help="Show the output of the LLM in the console.",
 )
-def llm(folder_path: str, model: str, verbose: bool):
-    run_llm_handler.handle(folder_path, model, verbose)
+@click.option(
+    "--use-terser",
+    default=True,
+    type=click.BOOL,
+    help="Minify the generated output with terser cli.",
+)
+def llm(folder_path: str, model: str, verbose: bool, use_terser: bool):
+    run_llm_handler.handle(folder_path, model, verbose, use_terser)
 
 
 @click.group()

@@ -2,12 +2,13 @@ import os
 from typing import Callable, TypeVar
 
 from langchain_core.output_parsers import StrOutputParser
+
 from llminify.available_models import get_model
 from llminify.minifiers.base import BaseMinifier
 from llminify.minifiers.terser import TerserMinifier
 from llminify.templates.minifier import minifier_prompt
-from llminify.utils.timestamp import get_timestamp_string
 from llminify.utils.log import logger
+from llminify.utils.timestamp import get_timestamp_string
 
 T = TypeVar("T")
 
@@ -15,8 +16,9 @@ T = TypeVar("T")
 class LlmMinifier(BaseMinifier):
     MAX_RETRIES = 5
 
-    def __init__(self, model: str) -> None:
+    def __init__(self, model: str, use_terser: bool) -> None:
         self.terser_minifier = TerserMinifier()
+        self.use_terser = use_terser
         super().__init__(model)
 
     def _retry_action_if_needed(self, action: Callable[..., T], *args, **kwargs) -> T:
@@ -65,4 +67,7 @@ class LlmMinifier(BaseMinifier):
         return output
 
     def _minify_with_terser(self, file_path: str) -> str:
+        if not self.use_terser:
+            return self._read_file(file_path)
+
         return self.terser_minifier.minify_file(file_path)
